@@ -3,6 +3,10 @@
   <button type="button" class="btn btn-primary">New Restaurant</button>
 </a>
 <br />
+<div class="switch mt-3">
+  <a href="/admin/restaurants">Restaurants</a>
+  <a href="/admin/users">Users</a>
+</div>
 <br />
 <table class="table align-middle">
   <thead class="thead-dark">
@@ -15,8 +19,9 @@
   <tbody>
     {{#each restaurants}}
     <tr>
+      <span>{{this.email}}</span>
       <th scope="row">{{this.id}}</th>
-      <td>{{this.name}}</td>
+      <td scope="row">{{this.name}}</td>
       <td>
         <button type="button" class="btn btn-link">
           <a class="btn btn-link link-primary" href="/admin/restaurants/{{this.id}}">

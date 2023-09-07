@@ -36,6 +36,7 @@ const userController = {
   },
   logout: (req, res) => {
     req.flash('success_messages', '登出成功！')
+    console.log('123')
     req.logout() // 會把 user id 對應的 session 清除，對伺服器來說，session消失＝使用者登出
     res.redirect('/signin')
   }

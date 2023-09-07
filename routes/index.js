@@ -14,7 +14,7 @@ router.post('/signup', userController.signUp)
 
 router.get('/signin', userController.signInPage)
 router.post('/signin', passport.authenticate('local', { failureRedirect: '/signin', failureFlash: true }), userController.signIn)
-router.get('logout', userController.logout)
+router.get('/logout', userController.logout)
 
 router.get('/restaurants', authenticated, restController.getRestaurant)
 // 設定 fallback 路由：當其他路由條件都不符合時，最終會接到這條路由來
@@ -24,10 +24,10 @@ router.get('/', (req, res) => {
 })
 
 // 其他任何錯誤 都導向 fault 單純自己寫來測試功能
-router.get('*', (req, res) => {
-  // 如果是 redirect('/fault') 則會重新導向 /fault路由 ， 但就需要另外定義 router.get('fault')...這條路由才能使用
-  res.render('fault')
-})
+// router.get('*', (req, res) => {
+//   // 如果是 redirect('/fault') 則會重新導向 /fault路由 ， 但就需要另外定義 router.get('fault')...這條路由才能使用
+//   res.render('fault')
+// })
 router.use('/', generalErrorHandler) // 設定 error handler
 // 這樣有錯誤發生時，才會跳到這個 middleware來處理
 

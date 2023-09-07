@@ -1,5 +1,5 @@
 const { Restaurant } = require('../models')
-const { localFileHandler } = require('../helpers/file-helpers')
+const { imgurFileHandler } = require('../helpers/file-helpers')
 
 const adminController = {
   getRestaurants: (req, res, next) => {
@@ -23,7 +23,7 @@ const adminController = {
     const { file } = req // const file = req.file
     // name 是必填，若發現是空值就中止程式碼，並在畫面顯示錯誤  這裡的 error 拋出後由 middleware error-handler處理
     if (!name) throw new Error('Restaurant name is required.')
-    localFileHandler(file)
+    imgurFileHandler(file)
       .then(filePath => Restaurant.create({
         name,
         tel,
@@ -67,7 +67,7 @@ const adminController = {
     // promise.all 會執行玩[]內的所有promise，才繼續下一個then，若兩個promise都有回傳，下一個then就回得到兩個值
     Promise.all([
       Restaurant.findByPk(req.params.id),
-      localFileHandler(file)
+      imgurFileHandler(file)
     ])
       .then(([restaurant, filePath]) => {
         if (!restaurant) throw new Error("Restaurant didn't exist!")

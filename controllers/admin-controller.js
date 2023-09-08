@@ -1,5 +1,6 @@
 const { Restaurant, User } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helpers')
+const { raw } = require('express')
 
 const adminController = {
   getRestaurants: (req, res, next) => {
@@ -102,7 +103,7 @@ const adminController = {
       })
       .catch(err => next(err))
   },
-
+  // ========================User==================
   // get users
   getUsers: (req, res, next) => {
     User.findAll({
@@ -110,6 +111,30 @@ const adminController = {
     })
       .then(users => {
         res.render('admin/users', ({ users }))
+      })
+      .catch(err => next(err))
+  },
+
+  patchUser: (req, res, next) => {
+    console.log('patch')
+    User.findByPk(req.params.id)
+      .then(user => {
+        if (!user) throw new Error("user doesn't exist")
+        // console.log(user)
+        if (user.isAdmin === true) {
+          // console.log('TTTTT==================')
+          return user.update({
+            isAdmin: false
+          })
+        } else {
+          return user.update({
+            isAdmin: true
+          })
+        }
+      })
+      .then(() => {
+        req.flash('success_messages', 'role has been changed.')
+        res.redirect('/admin/users')
       })
       .catch(err => next(err))
   }

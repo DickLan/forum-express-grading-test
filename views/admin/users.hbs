@@ -4,8 +4,9 @@
 </a>
 <br />
 <div class="switch mt-3">
-<a href="/admin/restaurants">Restaurants</a>
-<a href="/admin/users">Users</a>
+  <a href="/admin/restaurants">Restaurants</a>
+  <span>|</span>
+  <a href="/admin/users">Users</a>
 </div>
 
 <br />
@@ -33,14 +34,16 @@
         {{/if}}
       </td>
       <td>
-        <a href="" class="btn btn-link">
-          {{#if this.isAdmin}}
-          to user
-          {{else}}
-          to admin
-          {{/if}}
-        </a>
+        <form action="/admin/users/{{this.id}}?_method=PATCH" method="post">
 
+          <button class="btn btn-link" type="submit">
+            {{#if this.isAdmin}}
+            to user
+            {{else}}
+            to admin
+            {{/if}}
+          </button>
+        </form>
       </td>
     </tr>
     {{/each}}

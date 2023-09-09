@@ -1,12 +1,15 @@
-const { Restaurant, User } = require('../models')
+const { Restaurant, User, Category } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helpers')
 const { raw } = require('express')
 
 const adminController = {
   getRestaurants: (req, res, next) => {
     Restaurant.findAll({
-      raw: true
+      raw: true,
+      nest: true,
+      include: [Category]
     })
+      // nest => restaurant.category.XXX
       .then(restaurants => {
         // console.log('restaurants', restaurants)
         res.render('admin/restaurants', ({ restaurants }))
@@ -41,8 +44,11 @@ const adminController = {
   },
   getRestaurant: (req, res, next) => {
     Restaurant.findByPk(req.params.id, {
-      raw: true
+      raw: true,
+      nest: true,
+      include: [Category]
     })
+      // 單筆資料 可以在 render 回傳的時候 改成restaurant.toJSON() 方便sequelize資料庫操作 ex:update等功能
       .then(restaurant => {
         if (!restaurant) throw new Error("Restaurant didn't exits.")
         res.render('admin/restaurant', { restaurant })

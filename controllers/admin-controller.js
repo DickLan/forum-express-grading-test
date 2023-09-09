@@ -106,7 +106,8 @@ const adminController = {
   // ========================User==================
   // get users
   getUsers: (req, res, next) => {
-    User.findAll({
+    // 函式若包含有非同步行為，例如這裡請sequelize去搔資料，會需要用 return 讓城市知道有非同步事件需要等待
+    return User.findAll({
       raw: true
     })
       .then(users => {
@@ -117,23 +118,29 @@ const adminController = {
 
   patchUser: (req, res, next) => {
     console.log('patch')
-    User.findByPk(req.params.id)
+    return User.findByPk(req.params.id)
       .then(user => {
         if (!user) throw new Error("user doesn't exist")
+        if (user.name === 'admin') {
+          console.log('BBBBBBBBBBBBB')
+          req.flash('error_messages', '禁止變更 root 權限')
+          return res.redirect('back')
+        }
         // console.log(user)
         if (user.isAdmin === true) {
           // console.log('TTTTT==================')
+          req.flash('success_messages', '使用者權限變更成功')
           return user.update({
             isAdmin: false
           })
         } else {
+          req.flash('success_messages', '使用者權限變更成功')
           return user.update({
             isAdmin: true
           })
         }
       })
       .then(() => {
-        req.flash('success_messages', 'role has been changed.')
         res.redirect('/admin/users')
       })
       .catch(err => next(err))

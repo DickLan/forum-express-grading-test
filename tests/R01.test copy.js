@@ -80,8 +80,8 @@ describe('# R01', () => {
 
     context('# [修改使用者權限] for root', () => {
       before(() => {
-        // 製作假資料
-        // 本 context 會用這筆資料進行測試
+      // 製作假資料
+      // 本 context 會用這筆資料進行測試
         this.UserMock = createModelMock(
           'User',
           [{

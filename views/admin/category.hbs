@@ -1,10 +1,16 @@
 {{> admin-tab route='categories'}}
 
-<form action="/admin/categories" method="post">
-  {{!-- name=category => req.body.[category] 由這裡來 --}}
-  <input type="text" id="category" name="category" placeholder="category name">
-  <button type="submit" class="btn btn-primary">create Category</button>
-</form>
+<div class="d-flex align-items-center pt-3 pb-5 my-3 text-white-50 bg-purple">
+  <form class="row" action="/admin/categories" method="post">
+    {{!-- name=category => req.body.[category] 由這裡來 --}}
+    <div class="col-auto">
+      <input class="form-control" type="text" id="category" name="category" placeholder="category name">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+  </form>
+</div>
 
 <table class="table align-middle">
   <thead class="thead-dark">

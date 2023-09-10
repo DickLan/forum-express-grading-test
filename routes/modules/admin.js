@@ -21,6 +21,9 @@ router.get('/users', adminController.getUsers)
 router.patch('/users/:id', adminController.patchUser)
 
 // category
+// 瀏覽 get 編輯分類的表單
+router.get('/categories/:id', categoryController.getCategories)
+router.put('/categories/:id', categoryController.putCategories)
 router.get('/categories', categoryController.getCategories)
 router.post('/categories', categoryController.postCategories)
 

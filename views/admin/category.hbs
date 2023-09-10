@@ -1,15 +1,34 @@
 {{> admin-tab route='categories'}}
-
 <div class="d-flex align-items-center pt-3 pb-5 my-3 text-white-50 bg-purple">
+
+  {{!-- create --}}
+  {{#if category}}
+  {{!-- edit --}}
+  <form class="row" action="/admin/categories/{{category.id}}?_method=put" method="post">
+    <div class="col-auto">
+      <input class="form-control" type="text" id="category" name="category" placeholder="category name"
+        value={{category.name}}>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">Edit</button>
+      <a class="ms-3" href="/admin/categories">Or create</a>
+    </div>
+  </form>
+
+  {{else}}
   <form class="row" action="/admin/categories" method="post">
     {{!-- name=category => req.body.[category] 由這裡來 --}}
     <div class="col-auto">
-      <input class="form-control" type="text" id="category" name="category" placeholder="category name">
+      <input class="form-control" type="text" id="category" name="category" placeholder="category name" name="cateName"
+        value={{category.name}}>
     </div>
     <div class="col-auto">
       <button type="submit" class="btn btn-primary">Create</button>
     </div>
   </form>
+
+  {{/if}}
+
 </div>
 
 <table class="table align-middle">
@@ -27,17 +46,21 @@
       <th scope="row">{{this.name}}</th>
 
       <td>
-        </button>
-        <button type="button" class="btn btn-link">
-          <a class="btn btn-link link-primary" href="/admin/categories/{{this.id}}/edit">
-            Edit
-          </a>
-        </button>
-        <form action="/admin/categories/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
-          <button type="submit" class="btn btn-link link-danger"
-            onclick="return confirm(`確定要刪除{{this.name}}嗎？`)">Delete</button>
-        </form>
+        <div class="row">
+          <div class="col-auto">
+            <form action="/admin/categories/{{this.id}}?_method=get" method="post">
+              <button type="submit" class="btn btn-link link-primary">Edit</button>
+            </form>
+          </div>
+          <div class="col-auto">
+            <form action="/admin/categories/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+              <button type="submit" class="btn btn-link link-danger"
+                onclick="return confirm(`確定要刪除{{this.name}}嗎？`)">Delete</button>
+          </div>
+          </form>
+        </div>
       </td>
+
     </tr>
     {{/each}}
   </tbody>

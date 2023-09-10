@@ -1,16 +1,4 @@
-<h1>餐廳後台</h1>
-<a href='/admin/restaurants/create'>
-  <button type="button" class="btn btn-primary">New Restaurant</button>
-</a>
-<br />
-<div class="switch mt-3">
-  <a href="/admin/restaurants">Restaurants</a>
-  <span>|</span>
-  <a href="/admin/users">Users</a>
-  <span>|</span>
-  <a href="/admin/categories">Category</a>
-</div>
-<br />
+{{> admin-tab route='categories'}}
 <table class="table align-middle">
   <thead class="thead-dark">
     <tr>
@@ -24,7 +12,7 @@
     <tr>
       <th scope="row">{{this.id}}</th>
       <th scope="row">{{this.name}}</th>
-      
+
       <td>
         </button>
         <button type="button" class="btn btn-link">

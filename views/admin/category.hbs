@@ -1,4 +1,11 @@
 {{> admin-tab route='categories'}}
+
+<form action="/admin/categories" method="post">
+  {{!-- name=category => req.body.[category] 由這裡來 --}}
+  <input type="text" id="category" name="category" placeholder="category name">
+  <button type="submit" class="btn btn-primary">create Category</button>
+</form>
+
 <table class="table align-middle">
   <thead class="thead-dark">
     <tr>

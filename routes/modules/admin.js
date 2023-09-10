@@ -22,6 +22,7 @@ router.patch('/users/:id', adminController.patchUser)
 
 // category
 router.get('/categories', categoryController.getCategories)
+router.post('/categories', categoryController.postCategories)
 
 router.use('/', (req, res) => res.redirect('/admin/restaurants'))
 module.exports = router

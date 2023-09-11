@@ -16,7 +16,7 @@ router.get('/signin', userController.signInPage)
 router.post('/signin', passport.authenticate('local', { failureRedirect: '/signin', failureFlash: true }), userController.signIn)
 router.get('/logout', userController.logout)
 
-router.get('/restaurants', authenticated, restController.getRestaurant)
+router.get('/restaurants', authenticated, restController.getRestaurants)
 // 設定 fallback 路由：當其他路由條件都不符合時，最終會接到這條路由來
 // 而這條路由的意義是  當連接到根目錄  http://localhost:3000 就會導向restaurant
 router.get('/', (req, res) => {

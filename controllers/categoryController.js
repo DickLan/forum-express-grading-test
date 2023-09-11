@@ -1,4 +1,3 @@
-const { ne } = require('faker/lib/locales')
 const { Category } = require('../models')
 
 const categoryController = {

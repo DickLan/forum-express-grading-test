@@ -17,7 +17,13 @@
     <tr>
       <span>{{this.email}}</span>
       <th scope="row">{{this.id}}</th>
-      <th scope="row">{{this.Category.name}}</th>
+      <th scope="row">
+        {{#if this.Category.name}}
+        {{this.Category.name}}
+        {{else}}
+        分類不存在
+        {{/if}}
+      </th>
       <td scope="row">{{this.name}}</td>
       <td>
         <button type="button" class="btn btn-link">

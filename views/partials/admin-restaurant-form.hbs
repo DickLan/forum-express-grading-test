@@ -12,7 +12,10 @@
     {{!--
     如果沒有 ../ ，在 #EACH 的語境下，會認定是在呼叫 this.restaurant，於是就會去categories iter的item內找restaurant屬性，然後會找不到
     --}}
-    <option value="{{this.id}}" {{#ifCond this.id ../restaurant.categoryId}} selected {{/ifCond}}>{{this.name}}</option>
+    <option value="{{this.id}}" 
+    {{#ifCond this.id ../restaurant.categoryId}} selected 
+    {{/ifCond}}>
+    {{this.name}}</option>
     {{/each}}
   </select>
 

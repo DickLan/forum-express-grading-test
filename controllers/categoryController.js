@@ -1,3 +1,4 @@
+const { ne } = require('faker/lib/locales')
 const { Category } = require('../models')
 
 const categoryController = {
@@ -40,6 +41,17 @@ const categoryController = {
         return category.update({ name: name })
       })
       .then(() => res.redirect('/admin/categories'))
+      .catch(err => next(err))
+  },
+  deleteCategory: (req, res, next) => {
+    Category.findByPk(req.params.id)
+      .then(category => {
+        if (!category) throw new Error("category doesn't exist")
+        return category.destroy()
+      })
+      .then(() => {
+        res.redirect('/admin/categories')
+      })
       .catch(err => next(err))
   }
 }
